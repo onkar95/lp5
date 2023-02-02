@@ -58,3 +58,55 @@ int main()
 2 5
 3 6
 3 7*/
+
+
+//explanation
+1. #include <iostream> and #include <vector> are standard library headers that provide input/output streams and dynamic arrays, respectively.
+
+2. #include <queue> is a standard library header that provides a queue data structure, which is used to implement the BFS algorithm.
+
+3. #include <omp.h> is the header for OpenMP, which provides support for multi-threading.
+
+4. vector<int> adj[N]; is a global array of vectors, where N is a constant integer (in this case, 100005). It represents an adjacency list, which is a data structure that stores the edges of the graph. Each element of adj is a vector of integers representing the neighbors of a particular node.
+
+5.bool visited[N]; is a global array of booleans, where N is a constant integer (in this case, 100005). It is used to keep track of which nodes have already been visited by the BFS algorithm.
+
+6. void BFS(int s) is the function that implements the BFS algorithm. It takes a single integer argument s, which is the starting node.
+
+7. queue<int> q; is a queue of integers that is used to store the nodes to be visited by the BFS algorithm.
+
+8. q.push(s); adds the starting node s to the queue.
+
+9. visited[s] = true; marks the starting node as visited.
+
+10. while (!q.empty()) is the main loop of the BFS algorithm. It continues as long as the queue is not empty.
+
+11. int u = q.front(); removes the front node from the queue and stores it in u.
+
+12. q.pop(); removes the front node from the queue.
+
+13. #pragma omp parallel for is an OpenMP directive that parallelizes the following loop. It creates multiple threads to visit all the neighbors of u in parallel.
+
+14. for (int i = 0; i < adj[u].size(); i++) is a loop that visits all the neighbors of u.
+
+15. int v = adj[u][i]; is the current neighbor of u.
+
+16. if (!visited[v]) checks if the current neighbor v has already been visited.
+
+17. visited[v] = true; marks the current neighbor as visited.
+
+18. q.push(v); adds the current neighbor to the queue.
+
+19. int main() is the main function of the program. It reads the input for the graph and calls the BFS function to perform the BFS algorithm.
+
+20. cin >> n >> m >> s; reads the input for the number of nodes (n), number of edges (m), and the starting 14. node (s).
+
+21. The following loop reads the input for the edges of the graph:
+
+for (int i = 0; i < m; i++)
+{
+    int u, v;
+    cin >> u >> v;
+    adj[u].push_back(v);
+    adj[v].push_
+   }
