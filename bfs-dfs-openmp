@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <omp.h>
+
+using namespace std;
+
+const int N = 100005;
+vector<int> adj[N];
+bool visited[N];
+
+void BFS(int s)
+{
+    queue<int> q;
+    q.push(s);
+    visited[s] = true;
+    
+    while (!q.empty())
+    {
+        int u = q.front();
+        q.pop();
+
+        // Parallelize the loop to visit all the neighbors
+        #pragma omp parallel for
+        for (int i = 0; i < adj[u].size(); i++)
+        {
+            int v = adj[u][i];
+            if (!visited[v])
+            {
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+}
+
+int main()
+{
+    int n, m, s;
+    cin >> n >> m >> s;
+    
+    for (int i = 0; i < m; i++)
+    {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    
+    BFS(s);
+    return 0;
+}
