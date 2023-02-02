@@ -50,3 +50,11 @@ int main()
     BFS(s);
     return 0;
 }
+
+//sample inputs
+/*1 2
+1 3
+2 4
+2 5
+3 6
+3 7*/
